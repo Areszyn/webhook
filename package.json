@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Dodo Payment Webhook",
   "main": "index.js",
-  "type": "module", // Remove this if using CommonJS (`require`)
+  "type": "module", // Remove if using CommonJS (`require`)
   "scripts": {
     "start": "node index.js"
   },
