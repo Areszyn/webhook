@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import crypto from 'crypto';
+import { createServer } from 'vercel-http';
 
 const app = express();
 app.use(bodyParser.json());
@@ -8,13 +9,6 @@ app.use(bodyParser.json());
 app.post('/dodo-webhook', (req, res) => {
   const payload = req.body;
   console.log('Webhook received:', payload);
-
-  // Optional: Verify signature if needed
-  // const secret = process.env.DODO_SECRET;
-  // const signature = req.headers['x-dodo-signature'];
-  // if (!verifySignature(payload, signature, secret)) {
-  //   return res.status(401).send('Invalid signature');
-  // }
 
   if (payload.event === 'payment.success') {
     console.log('✅ Payment succeeded:', payload.transaction_id);
@@ -33,6 +27,5 @@ function verifySignature(payload, signature, secret) {
   return signature === expectedSig;
 }
 
-// ❌ REMOVE app.listen()
-// ✅ Export app for Vercel
-export default app;
+// ✅ Wrap Express app for Vercel
+export default createServer(app);
