@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import crypto from 'crypto';
-import { createServer } from 'vercel-http';
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,5 +26,5 @@ function verifySignature(payload, signature, secret) {
   return signature === expectedSig;
 }
 
-// ✅ Wrap Express app for Vercel
-export default createServer(app);
+// ✅ Export app for Vercel
+export default app;
