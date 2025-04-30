@@ -3,15 +3,13 @@ import bodyParser from 'body-parser';
 import crypto from 'crypto';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
 app.use(bodyParser.json());
 
 app.post('/dodo-webhook', (req, res) => {
   const payload = req.body;
   console.log('Webhook received:', payload);
 
-  // 🔐 Verify Signature (if Dodo provides a secret)
+  // Optional: Verify signature if needed
   // const secret = process.env.DODO_SECRET;
   // const signature = req.headers['x-dodo-signature'];
   // if (!verifySignature(payload, signature, secret)) {
@@ -35,8 +33,6 @@ function verifySignature(payload, signature, secret) {
   return signature === expectedSig;
 }
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
-export default app; // For Vercel
+// ❌ REMOVE app.listen()
+// ✅ Export app for Vercel
+export default app;
