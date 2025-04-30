@@ -1,8 +1,9 @@
 {
   "name": "webhook",
   "version": "1.0.0",
-  "type": "module", // Keep this for ESM
+  "description": "Dodo Payment Webhook",
   "main": "index.js",
+  "type": "module", // Remove this if using CommonJS (`require`)
   "scripts": {
     "start": "node index.js"
   },
